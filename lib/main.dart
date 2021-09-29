@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:listview/name_widget.dart';
+
+import 'name_widget.dart';
 
 void main() => runApp(MyApp());
 
