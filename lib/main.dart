@@ -1,157 +1,68 @@
 import 'package:flutter/material.dart';
+import 'package:listview/name_widget.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  final items = [
+    'mohib',
+    'ismail',
+    'ihsan',
+    'mohib',
+    'ismail',
+    'ihsan',
+    'mohib',
+    'ismail',
+    'ihsan',
+    'mohib',
+    'ismail',
+    'ihsann',
+    'mohib',
+    'ismail',
+    'ihsann',
+    'mohib',
+    'ismail',
+    'ihsann',
+    'mohib',
+    'ismail',
+    'ihsann',
+    'mohib',
+    'ismail',
+    'ihsann',
+  ];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: DefaultTabController(
-        length: 3,
-        child: Scaffold(
+        title: 'Material App',
+        home: Scaffold(
           appBar: AppBar(
-            title: Text('Proxy Marketers'),
-            centerTitle: true,
-            actions: [
-              IconButton(
-                onPressed: () {
-                  print('hi i am a Button');
-                },
-                icon: Icon(Icons.close),
-              ),
-            ],
-            bottom: TabBar(tabs: [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('Chat'),
-                ),
-              ),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('Product'),
-                ),
-              ),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: FittedBox(child: Text('New Product')),
-                ),
-              ),
-            ]),
+            title: Text('Material App Bar'),
           ),
-          drawer: Drawer(),
-          body: TabBarView(children: [
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  ListTile(
-                    leading: CircleAvatar(
-                        backgroundColor: Colors.amber,
-                        child: Icon(Icons.person)),
-                    title: Text('Mohib Star'),
-                    subtitle: Text('I am going'),
-                    trailing: Text('24/7'),
-                  ),
-                  ListTile(
-                    leading: CircleAvatar(
-                        backgroundColor: Colors.amber,
-                        child: Icon(Icons.person)),
-                    title: Text('Mohib Star'),
-                    subtitle: Text('I am going'),
-                    trailing: Text('24/7'),
-                  ),
-                  ListTile(
-                    leading: CircleAvatar(
-                        backgroundColor: Colors.amber,
-                        child: Icon(Icons.person)),
-                    title: Text('Mohib Star'),
-                    subtitle: Text('I am going'),
-                    trailing: Text('24/7'),
-                  ),
-                  ListTile(
-                    leading: CircleAvatar(
-                        backgroundColor: Colors.amber,
-                        child: Icon(Icons.person)),
-                    title: Text('Mohib Star'),
-                    subtitle: Text('I am going'),
-                    trailing: Text('24/7'),
-                  ),
-                  ListTile(
-                    leading: CircleAvatar(
-                        backgroundColor: Colors.amber,
-                        child: Icon(Icons.person)),
-                    title: Text('Mohib Star'),
-                    subtitle: Text('I am going'),
-                    trailing: Text('24/7'),
-                  ),
-                  ListTile(
-                    leading: CircleAvatar(
-                        backgroundColor: Colors.amber,
-                        child: Icon(Icons.person)),
-                    title: Text('Mohib Star'),
-                    subtitle: Text('I am going'),
-                    trailing: Text('24/7'),
-                  ),
-                  ListTile(
-                    leading: CircleAvatar(
-                        backgroundColor: Colors.amber,
-                        child: Icon(Icons.person)),
-                    title: Text('Mohib Star'),
-                    subtitle: Text('I am going'),
-                    trailing: Text('24/7'),
-                  ),
-                  ListTile(
-                    leading: CircleAvatar(
-                        backgroundColor: Colors.amber,
-                        child: Icon(Icons.person)),
-                    title: Text('Mohib Star'),
-                    subtitle: Text('I am going'),
-                    trailing: Text('24/7'),
-                  ),
-                  ListTile(
-                    leading: CircleAvatar(
-                        backgroundColor: Colors.amber,
-                        child: Icon(Icons.person)),
-                    title: Text('Mohib Star'),
-                    subtitle: Text('I am going'),
-                    trailing: Text('24/7'),
-                  ),
-                  ListTile(
-                    leading: CircleAvatar(
-                        backgroundColor: Colors.amber,
-                        child: Icon(Icons.person)),
-                    title: Text('Mohib Star'),
-                    subtitle: Text('I am going'),
-                    trailing: Text('24/7'),
-                  ),
-                ],
-              ),
-            ),
-            ListTile(),
-            ListTile(
-              leading: CircleAvatar(
-                backgroundColor: Colors.amber,
-              ),
-              title: Text('Mohib'),
-              subtitle: Row(
-                children: [
-                  Icon(
-                    Icons.call_made,
-                    size: 15,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text('24/799007'),
-                ],
-              ),
-            ),
-          ]),
-        ),
-      ),
-    );
+          body: ListView.builder(
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                  leading: Icon(Icons.image),
+                  title: Text(items[index]),
+                  trailing: Icon(Icons.image),
+                  onTap: () {
+                    Route route = MaterialPageRoute(
+                      builder: (context) => NamedWidget(
+                        name: items[index],
+                      ),
+                    );
+                    Navigator.of(context).push(route);
+                  });
+            },
+          ),
+        ));
+  }
+}
+class AnyWidget extends StatelessWidget {
+  const AnyWidget({ Key? key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(body: Container(color:Colors.pink),);
   }
 }
