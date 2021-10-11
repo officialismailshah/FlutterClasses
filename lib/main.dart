@@ -1,85 +1,73 @@
 import 'package:flutter/material.dart';
 
-import 'name_widget.dart';
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  final items = [
-    'mohib',
-    'ismail',
-    'ihsan',
-    'mohib',
-    'ismail',
-    'ihsan',
-    'mohib',
-    'ismail',
-    'ihsan',
-    'mohib',
-    'ismail',
-    'ihsann',
-    'mohib',
-    'ismail',
-    'ihsann',
-    'mohib',
-    'ismail',
-    'ihsann',
-    'mohib',
-    'ismail',
-    'ihsann',
-    'mohib',
-    'ismail',
-    'ihsann',
-  ];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Material App',
-        home: Scaffold(
-          appBar: AppBar(
-            title: Text('Material App Bar'),
-          ),
-          body: GridView.builder(
-              shrinkWrap: true,
-              itemCount: 8,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-              ),
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                              blurRadius: 5,
-                              color: Colors.grey,
-                              spreadRadius: 5,
-                              offset: Offset(-3, 3))
-                        ]),
-                    width: 100,
-                    height: 100,
-                    child: Center(
-                      child: Text(
-                        index.toString(),
-                      ),
-                    ),
-                  ),
-                );
-              }),
-        ));
+      title: 'Material App',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Material App Bar'),
+        ),
+        body: Sliders(),
+      ),
+    );
   }
 }
 
-class AnyWidget extends StatelessWidget {
-  const AnyWidget({Key? key}) : super(key: key);
+class Sliders extends StatefulWidget {
+  @override
+  State<Sliders> createState() => _SlidersState();
+}
+
+class _SlidersState extends State<Sliders> {
+  double slider1 = 0;
+  double slider2 = 0;
+  double slider3 = 0;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(color: Colors.pink),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Slider(
+          thumbColor: Colors.amber,
+          value: slider1,
+          onChanged: (value) {
+            setState(() {
+              print(value);
+              slider1 = value;
+              double half = (1.0 - slider1).toDouble();
+              slider2 = half / 2;
+              slider3 = half / 2;
+            });
+          },
+        ),
+        Slider(
+          value: slider2,
+          onChanged: (value) {
+            setState(() {
+              slider2 = value;
+              double half = (1.0 - slider2).toDouble();
+              slider1 = half / 2;
+              slider3 = half / 2;
+            });
+          },
+        ),
+        Slider(
+          value: slider3,
+          onChanged: (value) {
+            setState(() {
+              slider3 = value;
+              double half = (1.0 - slider3).toDouble();
+              slider1 = half / 2.0;
+              slider2 = half / 2.0;
+            });
+          },
+        ),
+      ],
     );
   }
 }
