@@ -1,4 +1,11 @@
+import 'package:first_ui/screen/sign_up_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+
+import 'screen/main_screen.dart';
+import 'widgets/login_fields.dart';
+import 'widgets/login_page_button.dart';
+import 'widgets/pm_logo.dart';
 
 void main() => runApp(MyApp());
 
@@ -6,68 +13,68 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Material App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Material App Bar'),
-        ),
-        body: Sliders(),
+      title: 'Proxy Marketers',
+      debugShowCheckedModeBanner: false,
+      home: HomeScreen(),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    ;
+    return Scaffold(
+      body: SafeArea(
+        child: LoginScreen(),
       ),
     );
   }
 }
 
-class Sliders extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({
+    Key? key,
+  }) : super(key: key);
+
   @override
-  State<Sliders> createState() => _SlidersState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _SlidersState extends State<Sliders> {
-  double slider1 = 0;
-  double slider2 = 0;
-  double slider3 = 0;
+class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController numberController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Slider(
-          thumbColor: Colors.amber,
-          value: slider1,
-          onChanged: (value) {
-            setState(() {
-              print(value);
-              slider1 = value;
-              double half = (1.0 - slider1).toDouble();
-              slider2 = half / 2;
-              slider3 = half / 2;
-            });
-          },
+    return Container(
+      color: Color(0xFF25A449),
+      child: SizedBox.expand(
+        child: Column(
+          children: [
+            SizedBox(height: 100),
+            KeyboardVisibilityBuilder(builder: (context, visibilty) {
+              return visibilty ? Container() : PMLogo();
+            }),
+            SizedBox(height: 20),
+            LoginFields(
+              number: numberController,
+              password: passwordController,
+            ),
+            SizedBox(height: 50),
+            Buttons(
+              firstBtn: 'Login',
+              firstOnpressed: MainScreen(),
+              secondBtn: 'Signup',
+              secondOnpressed: SignUpScreen(),
+            ),
+          ],
         ),
-        Slider(
-          value: slider2,
-          onChanged: (value) {
-            setState(() {
-              slider2 = value;
-              double half = (1.0 - slider2).toDouble();
-              slider1 = half / 2;
-              slider3 = half / 2;
-            });
-          },
-        ),
-        Slider(
-          value: slider3,
-          onChanged: (value) {
-            setState(() {
-              slider3 = value;
-              double half = (1.0 - slider3).toDouble();
-              slider1 = half / 2.0;
-              slider2 = half / 2.0;
-            });
-          },
-        ),
-      ],
+      ),
     );
   }
 }
